@@ -77,7 +77,6 @@ public class DireccionRestController {
             direccionFromDB.setCalle(direccion.getCalle());
             direccionFromDB.setNumeroInterior(direccion.getNumeroInterior());
             direccionFromDB.setNumeroExterior(direccion.getNumeroExterior());
-            direccionFromDB.Usuario.setIdUsuario(direccion.Usuario.getIdUsuario());
             iDireccionDAO.save(direccionFromDB);
             result.correct = true;
         } catch (Exception ex) {

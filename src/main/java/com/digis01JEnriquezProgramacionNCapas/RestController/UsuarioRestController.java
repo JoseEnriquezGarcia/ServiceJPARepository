@@ -61,7 +61,7 @@ public class UsuarioRestController {
                 usuarioDireccion.Direcciones = iDireccionDAO.findDireccion(usuario.getIdUsuario());
                 result.objects.add(usuarioDireccion);
             }
-            
+
             result.correct = true;
         } catch (Exception ex) {
             result.correct = false;
@@ -165,39 +165,53 @@ public class UsuarioRestController {
         }
     }
 
-//    @PutMapping("update")
-//    public ResponseEntity Update(@RequestBody Usuario usuario) {
-//        Result result = new Result();
-//        try {
-//            Optional<Usuario> usuarioOption = iUsuarioDAO.findById(usuario.getIdUsuario());
-//            
-//            if (usuarioOption.isPresent()) {
-//                Usuario usuarioOld = usuarioOption.get();
-//                
-//                usuarioOld = usuario;
-//                
-//                iUsuarioDAO.save(result);
-//            }
-//        } catch (Exception e) {
-//        }
-//        
-//        if (result.correct == true) {
-//            return ResponseEntity.ok(result);
-//        } else {
-//            return ResponseEntity.badRequest().body(result.errorMessage);
-//        }
-//    }
-//    @PatchMapping("updateStatus/{IdUsuario}/{Status}")
-//    public ResponseEntity UpdateStatus(@PathVariable int IdUsuario, @PathVariable int Status) {
-//        Result result = usuarioDAOImplementation.UpdateStatus(IdUsuario, Status);
-//
-//        if (result.correct == true) {
-//            return ResponseEntity.ok().body(result);
-//        } else {
-//            return ResponseEntity.badRequest().body(result.errorMessage);
-//        }
-//    }
-//
+    @PutMapping("update")
+    public ResponseEntity Update(@RequestBody Usuario usuario) {
+        Result result = new Result();
+        try {
+
+            Usuario usuarioFromDB = iUsuarioDAO.findById(usuario.getIdUsuario()).orElse(null);
+
+            usuarioFromDB.setUserName(usuario.getUserName());
+            usuarioFromDB.setNombre(usuario.getNombre());
+            usuarioFromDB.setApellidoPaterno(usuario.getApellidoPaterno());
+            usuarioFromDB.setApellidoMaterno(usuario.getApellidoMaterno());
+            usuarioFromDB.setEmail(usuario.getEmail());
+            usuarioFromDB.setPassword(usuario.getPassword());
+            usuarioFromDB.setFechaNacimiento(usuario.getFechaNacimiento());
+            usuarioFromDB.setSexo(usuario.getSexo());
+            usuarioFromDB.setTelefono(usuario.getTelefono());
+            usuarioFromDB.setCelular(usuario.getCelular());
+            usuarioFromDB.setCURP(usuario.getCURP());
+            usuarioFromDB.setImagen(usuario.getImagen());
+            usuarioFromDB.Rol.setIdRol(usuario.Rol.getIdRol());
+
+            iUsuarioDAO.save(usuarioFromDB);
+            result.correct = true;
+        } catch (Exception ex) {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+
+        if (result.correct == true) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result.errorMessage);
+        }
+    }
+
+    @PatchMapping("updateStatus/{IdUsuario}/{Status}")
+    public ResponseEntity UpdateStatus(@PathVariable int IdUsuario, @PathVariable int Status) {
+        Result result = new Result();
+
+        if (result.correct == true) {
+            return ResponseEntity.ok().body(result);
+        } else {
+            return ResponseEntity.badRequest().body(result.errorMessage);
+        }
+    }
+
     @DeleteMapping("delete/{IdUsuario}")
     public ResponseEntity Delete(@PathVariable int IdUsuario) {
         Result result = new Result();
