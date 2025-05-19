@@ -237,20 +237,20 @@ public class UsuarioRestController {
             return ResponseEntity.badRequest().body(result.errorMessage);
         }
     }
-//
-////    @PostMapping("getAllDinamico")
-////    public ResponseEntity GetAllDinamico(@RequestBody Usuario usuario) {
-////        Result result = usuarioDAOImplementation.GetAllDinamico(usuario);
-////        if (result.correct == true) {
-////            if (result.objects.isEmpty()) {
-////                return ResponseEntity.noContent().build();
-////            } else {
-////                return ResponseEntity.ok(result);
-////            }
-////        } else {
-////            return ResponseEntity.internalServerError().body(result.errorMessage);
-////        }
-////    }
+
+//    @PostMapping("getAllDinamico")
+//    public ResponseEntity GetAllDinamico(@RequestBody Usuario usuario) {
+//        Result result = usuarioDAOImplementation.GetAllDinamico(usuario);
+//        if (result.correct == true) {
+//            if (result.objects.isEmpty()) {
+//                return ResponseEntity.noContent().build();
+//            } else {
+//                return ResponseEntity.ok(result);
+//            }
+//        } else {
+//            return ResponseEntity.internalServerError().body(result.errorMessage);
+//        }
+//    }
 //    
 //    //Java Streams
 
@@ -265,14 +265,7 @@ public class UsuarioRestController {
 //            UsuarioDireccion usuarioDireccion = new UsuarioDireccion();
 //            usuarioDireccion.Usuario = new Usuario();
 //            usuarioDireccion.Usuario = usuarios;
-//
-//            List<Direccion> listaDirecciones = iDireccionDAO.findDireccion(usuarioDireccion.Usuario.getIdUsuario());
-//            usuarioDireccion.Direcciones = new ArrayList<>();
-//            for (Direccion direcciones : listaDirecciones) {
-//                Direccion direccion = new Direccion();
-//                direccion = direcciones;
-//                usuarioDireccion.Direcciones.add(direccion);
-//            }
+//            usuarioDireccion.Direcciones = iDireccionDAO.findDireccion(usuarioDireccion.Usuario.getIdUsuario());            
 //            result.objects.add(usuarioDireccion);
 //        }
 //        
@@ -308,7 +301,7 @@ public class UsuarioRestController {
 //            return ResponseEntity.internalServerError().body(result.errorMessage);
 //        }
 //    }
-//    
+    
 //    @GetMapping("orden/{bandera}") 
 //    public ResponseEntity Ordenar (@PathVariable int bandera){
 //        Result result = usuarioDAOImplementation.GetAll();
